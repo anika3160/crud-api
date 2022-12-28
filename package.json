@@ -1,0 +1,23 @@
+{
+  "name": "crud-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anika3160/crud-api.git"
+  },
+  "keywords": [
+    "nodejs",
+    "js"
+  ],
+  "author": "Anna Surahatava <anika3160@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anika3160/crud-api/issues"
+  },
+  "homepage": "https://github.com/anika3160/crud-api#readme"
+}
