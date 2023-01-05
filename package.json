@@ -1,11 +1,12 @@
 {
   "name": "crud-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple CRUD API",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "start:prod": "node index.js",
-    "start:dev": "nodemon index.js",
+    "start:prod": "node src/index.js",
+    "start:dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,7 +24,18 @@
   },
   "homepage": "https://github.com/anika3160/crud-api#readme",
   "devDependencies": {
-    "eslint": "^8.30.0",
-    "nodemon": "^2.0.20"
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-airbnb-typescript": "^15.0.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.3.2"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "uuid": "^9.0.0"
   }
 }
