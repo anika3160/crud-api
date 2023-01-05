@@ -1,7 +1,7 @@
 import http from 'http';
 import * as dotenv from 'dotenv';
 import { validate as uuidValidate } from 'uuid';
-import { getUserById, createUser } from './db.js';
+import { getUserById, createUser } from './database/index.js';
 
 dotenv.config();
 const PORT = process.env.PORT || 3000;
@@ -29,14 +29,22 @@ const server = http.createServer((req, res) => {
                     data += chunk;
                 })
                 req.on('end', () => {
-                    const dataFromReq = JSON.parse(data);
-                    const newUser = createUser(dataFromReq.name, dataFromReq.age, dataFromReq.hobbies);
-                    users.push(newUser);
-                    res.writeHead(201, {
-                        'Content-Type': 'text/json'
-                    });
-                    res.write(JSON.stringify(newUser))
-                    res.end();
+                    try {
+                        const dataFromReq = JSON.parse(data);
+                        const newUser = createUser(dataFromReq.name, dataFromReq.age, dataFromReq.hobbies);
+                        users.push(newUser);
+                        res.writeHead(201, {
+                            'Content-Type': 'text/json'
+                        });
+                        res.write(JSON.stringify(newUser))
+                        res.end();
+                    } catch (error) {
+                        res.writeHead(400, {
+                            'Content-Type': 'text/html'
+                        });
+                        res.write(error.message)
+                        res.end();
+                    }
                 })
                     break;
                 }
