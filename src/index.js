@@ -8,10 +8,10 @@ const PORT = process.env.PORT || 3000;
 let users = [];
 
 const server = http.createServer((req, res) => {
-    console.log(`Server request ${req.url} ${req.method}`)
+    try {
+        console.log(`Server request ${req.url} ${req.method}`)
 
     const routesEl = req.url.split('/');
-
     if (req.url === '/api/users') {
         switch(req.method) {
             case 'GET': {
@@ -48,6 +48,11 @@ const server = http.createServer((req, res) => {
                     break;
                 }
                 default:
+                    res.writeHead(500, {
+                        'Content-Type': 'text/html'
+                    });
+                    res.write("Method deprecated.")
+                    res.end();
                     break;
         }
     } else if (req.url.indexOf('/api/users/') === 0 && routesEl.length === 4) {
@@ -103,6 +108,11 @@ const server = http.createServer((req, res) => {
                         break;
                     }
                     default: 
+                        res.writeHead(500, {
+                            'Content-Type': 'text/html'
+                        });
+                        res.write("Method deprecated.")
+                        res.end();
                         break;
                 }
             } else {
@@ -126,6 +136,14 @@ const server = http.createServer((req, res) => {
         res.write('Unknown URL')
         res.end();
     }
+    } catch (error) {
+        res.writeHead(500, {
+            'Content-Type': 'text/html'
+        });
+        res.write(error.message)
+        res.end();
+    }
+
 })
 
 server.listen(PORT, () => {
