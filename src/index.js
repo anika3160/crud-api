@@ -11,7 +11,6 @@ const server = http.createServer((req, res) => {
     console.log(`Server request ${req.url} ${req.method}`)
 
     const routesEl = req.url.split('/');
-    // console.log(routesEl);
 
     if (req.url === '/api/users') {
         switch(req.method) {
@@ -95,6 +94,14 @@ const server = http.createServer((req, res) => {
                         })
                         break;
                     }
+                    case 'DELETE': {
+                        users = users.filter(user => user.id !== routesEl[3]);
+                        res.writeHead(204, {
+                            'Content-Type': 'text/html'
+                        });
+                        res.end();
+                        break;
+                    }
                     default: 
                         break;
                 }
@@ -102,7 +109,7 @@ const server = http.createServer((req, res) => {
                 res.writeHead(404, {
                     'Content-Type': 'text/html'
                 });
-                res.write(`Record with ${routesEl} === userID doesn't exist`)
+                res.write(`Record with ${routesEl[3]} === userID doesn't exist`)
                 res.end();
             }
         } else {
