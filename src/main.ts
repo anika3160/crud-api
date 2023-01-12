@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-import createServer from './modules/server.js';
+import createUsersServer from './modules/servers/users.js';
 import process from 'node:process';
 
 dotenv.config();
@@ -12,7 +12,7 @@ interface IUser {
 }
 let users: IUser[] = [];
 
-const server = createServer(users);
+const server = createUsersServer(users);
 server.listen((PORT), () => {
     console.log(`Server is running on port ${PORT}`)
 })

@@ -1,6 +1,6 @@
 import http from 'http';
 import { validate as uuidValidate } from 'uuid';
-import { getUserById, createOrUpdateUser } from './database.js';
+import { getUserById, createOrUpdateUser } from '../database/database.js';
 
 interface IUser {
     readonly id: string,
@@ -21,7 +21,7 @@ enum Method {
     delete = "DELETE",
 }
 
-const server = (users:IUser[]) => {
+const createUsersServer = (users:IUser[]) => {
     return http.createServer((req, res) => {
         const sendResponse = (statusCode:number, contentType:string, data?:any):void => {
             res.writeHead(statusCode, {
@@ -122,4 +122,4 @@ const server = (users:IUser[]) => {
     })
 } 
 
-export default server;
+export default createUsersServer;
