@@ -1,6 +1,11 @@
 import http from 'http';
 import { validate as uuidValidate } from 'uuid';
-import { getUserById, createOrUpdateUser } from '../database/database.js';
+import {
+    getUserById,
+    createOrUpdateUser,
+    getListOfUsers,
+    updateUsersData
+} from '../database/database.js';
 
 interface IUser {
     readonly id: string,
@@ -21,8 +26,9 @@ enum Method {
     delete = "DELETE",
 }
 
-const createUsersServer = (users:IUser[]) => {
-    return http.createServer((req, res) => {
+const createUsersServer = () => {
+    return http.createServer(async (req, res) => {
+        let users: IUser[] = await getListOfUsers();
         const sendResponse = (statusCode:number, contentType:string, data?:any):void => {
             res.writeHead(statusCode, {
                 'Content-Type': contentType
@@ -32,7 +38,6 @@ const createUsersServer = (users:IUser[]) => {
             }
             res.end();
         }
-    
         try {
             console.log(`Server request ${req.url} ${req.method}`)
     
@@ -55,6 +60,7 @@ const createUsersServer = (users:IUser[]) => {
                                     dataFromReq?.age,
                                     dataFromReq?.hobbies);
                                 users.push(newUser);
+                                updateUsersData(users);
                                 sendResponse(201, ContentType.json, newUser);
                             } catch (error: any) {
                                 sendResponse(400, ContentType.text, error.message);
@@ -91,6 +97,7 @@ const createUsersServer = (users:IUser[]) => {
                                             routesEl[3]);
                                         users = users.filter(user => user.id !== routesEl[3]);
                                         users.push(newUserData);
+                                        updateUsersData(users);
                                         sendResponse(200, ContentType.json, newUserData);
                                     } catch (error: any) {
                                         sendResponse(400, ContentType.text, error.message);
@@ -100,6 +107,7 @@ const createUsersServer = (users:IUser[]) => {
                             }
                             case Method.delete: {
                                 users = users.filter(user => user.id !== routesEl[3]);
+                                updateUsersData(users);
                                 sendResponse(204, ContentType.text);
                                 break;
                             }
@@ -120,6 +128,6 @@ const createUsersServer = (users:IUser[]) => {
             sendResponse(500, ContentType.text, error.message);
         }
     })
-} 
+}
 
 export default createUsersServer;

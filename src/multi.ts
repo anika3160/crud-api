@@ -4,20 +4,15 @@ import process from 'node:process';
 import os from 'node:os';
 import createUsersServer from './modules/servers/users.js';
 import createProxyServer from './modules/servers/proxy.js';
+import { updateUsersData } from './modules/database/database.js';
 
 dotenv.config();
 const PORT:number = Number(process.env.PORT) || 3000;
 const numCPUs:number = os.cpus().length;
-interface IUser {
-  readonly id: string,
-  username: string,
-  age: number,
-  hobbies: string[],
-}
-let users: IUser[] = [];
 
 if (cluster.isPrimary) {
   console.log(`Primary ${process.pid} is running`);
+  await updateUsersData([]);
   for(let i = 0; i<numCPUs; i++) {
     cluster.fork();
   }
@@ -34,14 +29,13 @@ if (cluster.isPrimary) {
 } else {
   const id: number = Number(cluster?.worker?.id);
   const workerPort: number = PORT + id;
-  const usersServer = createUsersServer(users);
+  const usersServer = createUsersServer();
   usersServer.listen((workerPort), () => {
     console.log(`Server is running on port ${workerPort}`);
   })
 
-  usersServer.on('error', err => {
+  usersServer.on('error', (err: any) => {
     console.log(err)
   })
-
-  console.log(`Worker ${process.pid} started`);
+ // console.log(`Worker ${process.pid} started`);
 }
