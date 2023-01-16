@@ -51,7 +51,7 @@ const createUsersServer = () => {
             req.on('end', () => {
               try {
                 const dataFromReq = data ? JSON.parse(data) : undefined
-                const newUser: IUser = createOrUpdateUser(dataFromReq?.name, dataFromReq?.age, dataFromReq?.hobbies)
+                const newUser: IUser = createOrUpdateUser(dataFromReq?.username, dataFromReq?.age, dataFromReq?.hobbies)
                 users.push(newUser)
                 updateUsersData(users)
                 sendResponse(201, ContentType.json, newUser)
@@ -85,7 +85,7 @@ const createUsersServer = () => {
                   try {
                     const dataFromReq = data ? JSON.parse(data) : undefined
                     const newUserData: IUser = createOrUpdateUser(
-                      dataFromReq?.name,
+                      dataFromReq?.username,
                       dataFromReq?.age,
                       dataFromReq?.hobbies,
                       routesEl[3],
