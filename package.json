@@ -4,11 +4,11 @@
   "description": "Simple CRUD API",
   "type": "module",
   "scripts": {
-    "build": "npx tsc",
-    "start:dev": "npx nodemon",
+    "build": "tsc",
+    "start:dev": "nodemon",
     "start:multi": "npm run build && node build/multi",
     "start:prod": "webpack --config webpack.config.cjs && node dist/bundle.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "repository": {
     "type": "git",

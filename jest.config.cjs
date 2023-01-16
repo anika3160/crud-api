@@ -1,12 +1,17 @@
 module.exports = {
-  moduleFileExtensions: ["js", "json", "ts"],
-  rootDir: ".",
-  testEnvironment: "node",
+  extensionsToTreatAsEsm: ['.ts'],
+  moduleFileExtensions: ['js', 'json', 'ts'],
+  testEnvironment: 'node',
   transform: {
-    "^.+\\.(t|j)s$": "ts-jest"
+    '^.+\\.(t|j)s$': [
+      'ts-jest',
+      {
+        useESM: true,
+        module: 'esnext',
+      },
+    ],
   },
   moduleNameMapper: {
-    "^src/(.*)$": "<rootDir>/../src/$1"
-  }
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+  },
 }
-
