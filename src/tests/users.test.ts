@@ -1,14 +1,19 @@
 import request from 'supertest'
-import { describe, expect, test } from '@jest/globals'
+import { describe, expect, test, beforeAll } from '@jest/globals'
 import createUsersServer from '../modules/servers/users.js'
+import { updateUsersData } from '../modules/database/database.js'
 
 const server = createUsersServer()
 
 const user = {
-  name: 'Anna',
+  username: 'Anna',
   age: 24,
   hobbies: ['ski', 'codding'],
 }
+
+beforeAll(async () => {
+  await updateUsersData([])
+});
 
 describe('POST/api/users', () => {
   describe('given a user data', () => {
@@ -30,11 +35,11 @@ describe('POST/api/users', () => {
     test('should respond with a status code of 400', async () => {
       const bodyData = [
         {
-          name: 'Anna',
+          username: 'Anna',
           age: 24,
         },
         {
-          name: 'Anna',
+          username: 'Anna',
           hobbies: ['ski', 'codding'],
         },
         {
@@ -49,4 +54,29 @@ describe('POST/api/users', () => {
       }
     })
   })
+
+  describe('when the data is missing', () => {
+    test('should respond with a status code of 400', async () => {
+      const bodyData = [
+        {
+          username: 'Anna',
+          age: 24,
+        },
+        {
+          username: 'Anna',
+          hobbies: ['ski', 'codding'],
+        },
+        {
+          age: 24,
+          hobbies: ['ski', 'codding'],
+        },
+        {},
+      ]
+      for (const body of bodyData) {
+        const response = await request(server).post('/api/users').send(body)
+        expect(response.statusCode).toBe(400)
+      }
+    })
+  })
+  
 })
