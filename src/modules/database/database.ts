@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
 import { isValidName, isValidAge, isValidHobbies } from './validators.js';
 import read from './read.js';
