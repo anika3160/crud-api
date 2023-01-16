@@ -11,3 +11,9 @@
 
 ## Development multi:
 5. Paste into console: `npm run start:multi` and press enter.
+
+## Production:
+5. Paste into console: `npm run start:prod` and press enter.
+
+## Tests:
+5. Paste into console: `npm run test` and press enter.

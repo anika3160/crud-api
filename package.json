@@ -8,8 +8,6 @@
     "start:dev": "npx nodemon",
     "start:multi": "npm run build && node build/multi",
     "start:prod": "webpack --config webpack.config.cjs && node dist/bundle.js",
-    "lint": "npx eslint ./src",
-    "format": "npx eslint ./src --fix",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
   },
   "repository": {
