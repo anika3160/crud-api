@@ -1,6 +1,5 @@
 import * as dotenv from 'dotenv';
 import createUsersServer from './modules/servers/users.js';
-import process from 'node:process';
 import { updateUsersData } from './modules/database/database.js';
 
 dotenv.config();

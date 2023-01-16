@@ -11,6 +11,6 @@ export const isValidHobbies = (hobbies: any): boolean => {
         const onlyStringHobbies: any = hobbies.filter(hobby => typeof hobby === 'string');
         return (hobbies.length === 0 || onlyStringHobbies.length === hobbies.length)
     }
-    return false
+    return false;
 }
  

@@ -17,7 +17,7 @@ if (cluster.isPrimary) {
     cluster.fork();
   }
 
-  cluster.on('exit', (worker, code, signal) => {
+  cluster.on('exit', (worker) => {
     console.log(`Worker ${worker.process.pid} died`);
   });
 
@@ -27,7 +27,7 @@ if (cluster.isPrimary) {
   });
 
 } else {
-  const id: number = Number(cluster?.worker?.id);
+  const id = Number(cluster?.worker?.id);
   const workerPort: number = PORT + id;
   const usersServer = createUsersServer();
   usersServer.listen((workerPort), () => {

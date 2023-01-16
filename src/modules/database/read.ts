@@ -17,4 +17,4 @@ const read = async () => {
     }
 };
 
-export default read;
+export default read

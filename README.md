@@ -1,12 +1,13 @@
 # CRUD API
 
 ## Common:
-1. clone this repo
-2. `npm install`
-3. rename `.env.template` to `.env`and put your `PORT`
+1. Clone this repository.
+2. Paste into console: `git checkout development` and press enter.
+3. Paste into console: `npm install` and press enter.
+4. Rename `.env.example` to `.env`and put your `PORT`.
 
 ## Development: 
-4. `npm start:dev`
+5. Paste into console: `npm run start:dev` and press enter.
 
 ## Development multi:
-4. `npm start:multi`
+5. Paste into console: `npm run start:multi` and press enter.
