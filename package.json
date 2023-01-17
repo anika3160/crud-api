@@ -1,0 +1,47 @@
+{
+  "name": "crud-api",
+  "version": "1.0.0",
+  "description": "Simple CRUD API",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start:dev": "nodemon",
+    "start:multi": "npm run build && node build/multi",
+    "start:prod": "webpack --config webpack.config.cjs && node dist/bundle.js",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anika3160/crud-api.git"
+  },
+  "keywords": [
+    "nodejs",
+    "js"
+  ],
+  "author": "Anna Surahatava <anika3160@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anika3160/crud-api/issues"
+  },
+  "homepage": "https://github.com/anika3160/crud-api#readme",
+  "devDependencies": {
+    "@jest/globals": "^29.3.1",
+    "@types/node": "^18.11.18",
+    "@types/supertest": "^2.0.12",
+    "jest": "^29.3.1",
+    "nodemon": "^2.0.20",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.0.5",
+    "ts-loader": "^9.4.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "@types/uuid": "^9.0.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "uuid": "^9.0.0"
+  }
+}
