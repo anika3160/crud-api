@@ -17,3 +17,11 @@
 
 ## Tests:
 5. Paste into console: `npm run test` and press enter.
+
+Users are stored as `objects` that have the following structure:
+{
+  `id`: unique identifier (`string`, `uuid`) generated on server side,
+  `username`: user's name (`string`, **required**),
+  `age`: user's age (`number`, **required**),
+  `hobbies`: user's hobbies (`array` of `strings` or empty `array` **required**),
+}
